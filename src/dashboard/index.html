@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="weather">
+    <head>
+        <base href="/">
+        <!-- Non-bower libraries -->
+        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyACfcuD-H1Fdb25mCb5Y0bs3A36kazagmA&libraries=drawing,places&sensor=false&v=3.17"></script>
+        <script src="//cdn.enplug.net/libs/angular/1.4.3/angular.js"></script>
+        <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+
+        <!-- build:css:release /dashboard/css/app.min.css?@@version -->
+        <link href="/css/app.css?@@version" rel="stylesheet">
+        <!-- /build -->
+
+        <!-- build:js:release /dashboard/js/app.min.js?@@version -->
+        <script src="/js/app.js?@@version"></script>
+        <!-- /build -->
+
+        <style type="text/css">
+            .angular-google-map-container {
+                height: 300px;
+                max-width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <ng-view class="container"></ng-view>
+        <help-block></help-block>
+    </body>
+</html>

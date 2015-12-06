@@ -1,0 +1,12 @@
+{
+  "name": "dashboard-weather-app",
+  "version": "1.0.1",
+  "private": true,
+  "devDependencies": {
+    "angular-google-maps": "~2.1.5",
+    "enplug-dashboard-sdk": "^2.0.0",
+    "enplug-dashboard-sdk-utils": "^1.0.0",
+    "enplug-dashboard-utils": "~1.4.0",
+    "lodash": "~3.10.1"
+  }
+}
