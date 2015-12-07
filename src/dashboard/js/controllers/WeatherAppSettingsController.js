@@ -1,20 +1,24 @@
-angular.module('weather').controller('WeatherAppController',
-    function ($scope, $enplugDashboard, settings, WeatherService, DetectChanges, Units) {
+angular.module('weather').controller('WeatherAppSettingsController',
+    function ($scope, $enplugDashboard, settings, WeatherService, $location, DetectChanges, Units) {
         'use strict';
 
         $enplugDashboard.pageLoading(false);
 
+        
         $scope.units = Units;
         $scope.settings = settings;
 
         // Show location search for first-time setup
         $scope.displaySearch = typeof $scope.settings.Id !== 'string';
 
+        $scope.signtext = {headline: ''};
+
         /**
          * Initializes the map, sets center position and zoom level
          * REQUIRED for the map to load
          * @type {{center: {latitude: number, longitude: number}, zoom: number}}
          */
+         /*
         $scope.map = {
             center: {
                 latitude: 29.83180,
@@ -22,6 +26,8 @@ angular.module('weather').controller('WeatherAppController',
             },
             zoom: 1
         };
+
+        */
 
         $scope.searchbox = {
             template: 'dashboard/templates/searchbox.tpl',
@@ -32,9 +38,11 @@ angular.module('weather').controller('WeatherAppController',
             events: {
 
                 // updates map with searched location
-                places_changed: placesChangedHandler
+                //places_changed: placesChangedHandler
             }
         };
+
+        /*
 
         $scope.marker = {
             id: 0,
@@ -95,6 +103,7 @@ angular.module('weather').controller('WeatherAppController',
                 return location.Name + ', ' + location.State || location.Country;
             }
         };
+        */
 
         function save() {
             $enplugDashboard.loadingIndicator('Updating settings');
@@ -109,24 +118,19 @@ angular.module('weather').controller('WeatherAppController',
         // Sets save button that is disabled when no changes or invalid data, and change location button when
         // user has an existing location
         function setHeaderButtons() {
-            var buttons = [{
-                text: 'Save',
-                action: save,
+            var headerButtons = [{
+                text: 'Content',
+                action: routeToContent,
                 class: 'btn-primary',
-                disabled: !DetectChanges.hasChanges() || !canSave()
+                icon: 'ion-upload'
             }];
 
-            if ($scope.settings.Id) {
-                buttons.unshift({
-                    text: 'Change location',
-                    action: function () {
-                        $scope.displaySearch = true;
-                    },
-                    class: 'btn-default'
-                });
-            }
+            $enplugDashboard.setHeaderButtons(headerButtons);
+        }
 
-            $enplugDashboard.setHeaderButtons(buttons);
+
+        function routeToContent() {
+            $location.path('/content');
         }
 
         // Only allow saving when we have a valid location. False when user is first setting up
