@@ -5,21 +5,32 @@ angular.module('weather', [
     'enplug.utils',
     'ngRoute',
     'ngMessages',
-    'uiGmapgoogle-maps'
+    'uiGmapgoogle-maps',
+    'firebase'
 ]);
 
-angular.module('weather').config(function ($routeProvider) {
+angular.module('weather').config(function ($routeProvider, $locationProvider) {
     'use strict';
 
-    $routeProvider.when('/', {
-        templateUrl: 'dashboard/templates/weather.tpl',
-        controller: 'WeatherAppController',
-        resolve: {
-            settings: function (WeatherService) {
-                return WeatherService.loadSettings();
+    $locationProvider.html5Mode(false);
+
+    $routeProvider
+        .when('/', {
+            templateUrl: 'dashboard/templates/weather.tpl',
+            controller: 'WeatherAppSettingsController',
+            resolve: {
+                settings: function (WeatherService) {
+                    return WeatherService.loadSettings();
+                }
             }
-        }
-    });
+        })
+        .when('/content', {
+            templateUrl: 'dashboard/templates/weather.content.tpl',
+            controller: 'WeatherAppContentController',
+            // Likely that we don't need the resolve, since we won't have a service
+            resolve: {
+            }
+        })
 });
 
 angular.module('weather').run(function (Environment, EndpointOptions, $enplugAccount, $route,
