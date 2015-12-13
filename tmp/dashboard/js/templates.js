@@ -18,9 +18,7 @@ angular.module('dashboard-weather-app-templates', []).run(['$templateCache', fun
     "                </material-checkbox>\n" +
     "            </th>\n" +
     "            <th st-sort=\"Value.Name\">Name</th>\n" +
-    "            <th st-sort=\"Value.Mimetype\">Type</th>\n" +
-    "            <th st-sort=\"Instances.length\">Displays</th>\n" +
-    "            <th st-sort=\"Value.IsInactive\">Status</th>\n" +
+    "            <th st-sort=\"Value.Mimetype\">Color</th>\n" +
     "            <th style=\"width: 50px;\"></th>\n" +
     "        </tr>\n" +
     "    </thead>\n" +
@@ -30,7 +28,12 @@ angular.module('dashboard-weather-app-templates', []).run(['$templateCache', fun
     "                <material-checkbox>\n" +
     "                    <input type=\"checkbox\" ng-checked=\"selected.indexOf(graphic.Id) > -1\" ng-click=\"select(graphic.Id)\">\n" +
     "                </material-checkbox>\n" +
+    "            </td>\n" +
+    "            <td>\n" +
     "                <div>{{ slide.headline }}</div>\n" +
+    "            </td>\n" +
+    "            <td>\n" +
+    "                <div>{{ slide.color }}</div>\n" +
     "            </td>\n" +
     "        </tr>\n" +
     "    </tbody>\n" +

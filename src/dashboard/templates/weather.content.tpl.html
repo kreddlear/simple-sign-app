@@ -7,9 +7,7 @@
                 </material-checkbox>
             </th>
             <th st-sort="Value.Name">Name</th>
-            <th st-sort="Value.Mimetype">Type</th>
-            <th st-sort="Instances.length">Displays</th>
-            <th st-sort="Value.IsInactive">Status</th>
+            <th st-sort="Value.Mimetype">Color</th>
             <th style="width: 50px;"></th>
         </tr>
     </thead>
@@ -19,7 +17,12 @@
                 <material-checkbox>
                     <input type="checkbox" ng-checked="selected.indexOf(graphic.Id) > -1" ng-click="select(graphic.Id)">
                 </material-checkbox>
+            </td>
+            <td>
                 <div>{{ slide.headline }}</div>
+            </td>
+            <td>
+                <div>{{ slide.color }}</div>
             </td>
         </tr>
     </tbody>
