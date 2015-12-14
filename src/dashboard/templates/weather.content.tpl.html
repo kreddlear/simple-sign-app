@@ -1,0 +1,29 @@
+<table class="table table--hover table--condensed table--open" st-table="syncedGraphics" st-safe-src="graphics" st-set-sort="stNestedSort">
+    <thead>
+        <tr>
+            <th style="width: 50px;">
+                <material-checkbox>
+                    <input type="checkbox" ng-checked="selected.length && selected.length === graphics.length" ng-click="selectAll()">
+                </material-checkbox>
+            </th>
+            <th st-sort="Value.Name">Name</th>
+            <th st-sort="Value.Mimetype">Color</th>
+            <th style="width: 50px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="slide in signs | orderBy:orderBy">
+            <td>
+                <material-checkbox>
+                    <input type="checkbox" ng-checked="selected.indexOf(graphic.Id) > -1" ng-click="select(graphic.Id)">
+                </material-checkbox>
+            </td>
+            <td>
+                <div>{{ slide.headline }}</div>
+            </td>
+            <td>
+                <div>{{ slide.color }}</div>
+            </td>
+        </tr>
+    </tbody>
+</table>    
