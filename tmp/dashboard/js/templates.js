@@ -1,13 +1,6 @@
 angular.module('dashboard-web-page-app-templates', []).run(['$templateCache', function($templateCache) {
   $templateCache.put("dashboard/templates/sign-creator.tpl",
     "<form class=\"form-material sign-preview\">\n" +
-    "    <!--     <div class=\"row\">\n" +
-    "        <div class=\"col-md-12 section-summary\">\n" +
-    "        <br>\n" +
-    "            <h2 class=\"text-center\">New Sign</h2>\n" +
-    "            <p>Create a new slide to add it to your SimpleSign slideshow.</p>\n" +
-    "        </div>\n" +
-    "    </div> -->\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-sm-9\">\n" +
     "            <div class=\"card sign-creator\">\n" +
@@ -16,32 +9,21 @@ angular.module('dashboard-web-page-app-templates', []).run(['$templateCache', fu
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-md-4\">\n" +
     "                            <div class=\"form-group\">\n" +
-    "                                <!-- <label for=\"comment\">Comment:</label> -->\n" +
     "                                <textarea ng-model=\"sign.headline\" field=\"headerAsset.Value.Title\" class=\"form-control\" rows=\"15\" id=\"comment\" maxlength=180 focus-on=\"mainTextArea\"></textarea>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <!-- Preview container -->\n" +
     "                        <div class=\"col-md-8\">\n" +
-    "                            <!-- need to replace this with preview for sign -->\n" +
-    "                            <!-- copied the code for landscape vs portrait preview from directory -->\n" +
     "                            <div class=\"preview-container\">\n" +
     "                                <div class=\"preview\">\n" +
     "                                    <div class=\"preview-wrapper\" ng-class=\"landscapePreview ? 'landscape' : 'portrait'\">\n" +
-    "                                        <!-- landscape preview -->\n" +
-    "                                        <!-- removed table etc - need to remove other styling code that pulls in from the entered assets (altho we might use that later if they want to set the color) -->\n" +
-    "                                        <!-- this just needs to point to the titletext -->\n" +
     "                                        <!-- Styling set in app.scss -->\n" +
     "                                        <div class=\"landscape-preview\" ng-if=\"landscapePreview\" ng-style=\"previewGradient\">\n" +
     "                                            <span class=\"title\" style=\"white-space: pre-wrap;\">{{ sign.headline  | limitTo: 180 }}</span>\n" +
     "                                        </div>\n" +
-    "                                        <!-- portrait preview -->\n" +
-    "                                        <!-- removed table etc - need to remove other styling code that pulls in from the entered assets (altho we might use that later if they want to set the color) -->\n" +
-    "                                        <!-- this just needs to point to the titletext -->\n" +
     "                                        <!-- Styling set in app.scss -->\n" +
     "                                        <div class=\"portrait-preview\" ng-if=\"!landscapePreview\" ng-style=\"previewGradient\">\n" +
     "                                            <span class=\"title\">{{ sign.headline  | limitTo: 180 }}</span>\n" +
     "                                        </div>\n" +
-    "                                        <!-- This allows them to choose whether it's landscape or portrait. Should we get their screen orientation automatically instead? -->\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +

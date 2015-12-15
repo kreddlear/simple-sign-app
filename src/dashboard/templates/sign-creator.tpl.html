@@ -7,30 +7,21 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <!-- <label for="comment">Comment:</label> -->
                                 <textarea ng-model="sign.headline" field="headerAsset.Value.Title" class="form-control" rows="15" id="comment" maxlength=180 focus-on="mainTextArea"></textarea>
                             </div>
                         </div>
-                        <!-- Preview container -->
                         <div class="col-md-8">
                             <div class="preview-container">
                                 <div class="preview">
                                     <div class="preview-wrapper" ng-class="landscapePreview ? 'landscape' : 'portrait'">
-                                        <!-- landscape preview -->
-                                        <!-- removed table etc - need to remove other styling code that pulls in from the entered assets (altho we might use that later if they want to set the color) -->
-                                        <!-- this just needs to point to the titletext -->
                                         <!-- Styling set in app.scss -->
                                         <div class="landscape-preview" ng-if="landscapePreview" ng-style="previewGradient">
                                             <span class="title" style="white-space: pre-wrap;">{{ sign.headline  | limitTo: 180 }}</span>
                                         </div>
-                                        <!-- portrait preview -->
-                                        <!-- removed table etc - need to remove other styling code that pulls in from the entered assets (altho we might use that later if they want to set the color) -->
-                                        <!-- this just needs to point to the titletext -->
                                         <!-- Styling set in app.scss -->
                                         <div class="portrait-preview" ng-if="!landscapePreview" ng-style="previewGradient">
                                             <span class="title">{{ sign.headline  | limitTo: 180 }}</span>
                                         </div>
-                                        <!-- This allows them to choose whether it's landscape or portrait. Should we get their screen orientation automatically instead? -->
                                     </div>
                                 </div>
                             </div>
