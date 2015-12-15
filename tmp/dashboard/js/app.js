@@ -38877,11 +38877,9 @@ angular.module('dashboard-web-page-app-templates', []).run(['$templateCache', fu
     "                            <div class=\"preview-container\">\n" +
     "                                <div class=\"preview\">\n" +
     "                                    <div class=\"preview-wrapper\" ng-class=\"landscapePreview ? 'landscape' : 'portrait'\">\n" +
-    "                                        <!-- Styling set in app.scss -->\n" +
     "                                        <div class=\"landscape-preview\" ng-if=\"landscapePreview\" ng-style=\"previewGradient\">\n" +
     "                                            <span class=\"title\" style=\"white-space: pre-wrap;\">{{ sign.headline  | limitTo: 180 }}</span>\n" +
     "                                        </div>\n" +
-    "                                        <!-- Styling set in app.scss -->\n" +
     "                                        <div class=\"portrait-preview\" ng-if=\"!landscapePreview\" ng-style=\"previewGradient\">\n" +
     "                                            <span class=\"title\">{{ sign.headline  | limitTo: 180 }}</span>\n" +
     "                                        </div>\n" +

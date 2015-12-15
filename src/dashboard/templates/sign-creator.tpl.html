@@ -14,11 +14,9 @@
                             <div class="preview-container">
                                 <div class="preview">
                                     <div class="preview-wrapper" ng-class="landscapePreview ? 'landscape' : 'portrait'">
-                                        <!-- Styling set in app.scss -->
                                         <div class="landscape-preview" ng-if="landscapePreview" ng-style="previewGradient">
                                             <span class="title" style="white-space: pre-wrap;">{{ sign.headline  | limitTo: 180 }}</span>
                                         </div>
-                                        <!-- Styling set in app.scss -->
                                         <div class="portrait-preview" ng-if="!landscapePreview" ng-style="previewGradient">
                                             <span class="title">{{ sign.headline  | limitTo: 180 }}</span>
                                         </div>
