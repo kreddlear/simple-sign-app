@@ -1,11 +1,13 @@
 angular.module('simple-sign', [
-    'dashboard-weather-app-templates', 
+//   TODO
+//   [] Test to see which app templates dep we need 
+    'dashboard-weather-app-templates',
+    'dashboard-web-page-app-templates', 
     'enplug.sdk',
     'enplug.sdk.utils',
     'enplug.utils',
     'ngRoute',
     'ngMessages',
-    'uiGmapgoogle-maps',
     'firebase'
 ]);
 
