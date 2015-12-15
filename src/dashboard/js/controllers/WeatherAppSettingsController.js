@@ -1,101 +1,86 @@
-angular.module('weather').controller('WeatherAppSettingsController',
-    function ($scope, $enplugDashboard, settings, WeatherService, $location, DetectChanges, $firebaseArray) {
+angular.module('simple-sign').controller('SignCreatorController',
+    function($scope, WebPageService, page, accountId, DetectChanges, $location, $enplugDashboard, $firebaseArray, focus, GradientService) {
         'use strict';
 
-        $enplugDashboard.pageLoading(false);
+        //Firebase url + array declaration
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
 
-        // I need something like this here. $scope.[something] = something; per parameters above
-        $scope.settings = settings;
+        var signs = $firebaseArray(signsRef);
 
-        // only created this because it complained
-        var watchValues = [];
+        // Set header title breadcrumb
+        $enplugDashboard.setHeaderTitle('Add website');
 
-        // Show location search for first-time setup
-        // Do I need this for my headline to show up?
-        // $scope.displaySearch = typeof $scope.settings.Id !== 'string';
+        // Focuses on the sign textbox
+        focus('mainTextArea');
 
-        $scope.signtext = {headline: ''};
-
-        // Declaring firebase stuff
-
-        var url = 'https://simplesign.firebaseio.com/accounts/katie/slides';
-
-        var signsRef = new Firebase(url);
-
-        $scope.signs = $firebaseArray(signsRef);
-
+        // Initializes the sign
         $scope.sign = {
-            color: '',
-            headline: '',
-            id: '',
-            src: ''
+            colors: [],
+            headline: ''
         };
 
-        // Need to clean this up - not all of this is necessary
-        $scope.searchbox = {
-            template: 'dashboard/templates/searchbox.tpl',
-            position: 'top-left',
+        $scope.getNewRandomGradient = function() {
 
-            // parentDiv is a ref to the id of the parent div in weather.tpl
-            parentDiv: 'searchBoxParent',
-            events: {
-                // updates map with searched location
-                //places_changed: placesChangedHandler
-            }
-        };
+            // Possible todo: get gradient by name
+            // Pulls in random gradient (array of 2 colors)
+            var randomGradientColors = GradientService.getRandomGradient();
 
-        // need to add an ng-submit for this to work?? but save button isn't in view...
-        $scope.save = function (signtext) {
-            $enplugDashboard.loadingIndicator('Updating sign');
+            $scope.previewGradient = {
+                'background': "linear-gradient(to top left," + randomGradientColors[0] + ", " + randomGradientColors[1] + ")"
+            };
 
-            return $scope.signs.$add(signtext).then( function (searchbox) {
-                $enplugDashboard.successIndicator('Updated sign').then(function () {
-                    watchChanges();
-                });
-            }, $enplugDashboard.errorIndicator);
-
-            /* What it used to look like: 
-            return WeatherService.saveSettings($scope.settings).then(function (settings) {
-                $enplugDashboard.successIndicator('Updated settings').then(function () {
-                    $scope.displaySearch = false;
-                    watchChanges();
-                });
-            }, $enplugDashboard.errorIndicator);
-            */
-        };
-
-        // function for routing to the other page using the button
-        $scope.routeToContent = function () {
-            $location.path('/content');
-        };
-
-        // From News App - declares and calls
-        function setHeaderButtons() { 
-            $enplugDashboard.setHeaderButtons([ 
-            { 
-            text: 'Content',
-            action: $scope.routeToContent,
-            class: 'btn-primary'
-            },
-            { 
-            text: 'Save feed', 
-            action: $scope.save, 
-            class: 'btn-primary', 
-            // disabled: !valid 
-            }
-        ]);
+            // Pulls in random colors for the gradient, puts them in the colors property on sign
+            $scope.sign.colors[0] = randomGradientColors[0];
+            $scope.sign.colors[1] = randomGradientColors[1];
         }
-        
-        // Make this a function so we can disable save button after saving a location
-        function watchChanges() {
-            DetectChanges.watch($scope);
-        }
-        watchChanges();
 
-        // Update save button status each time data changes
-        // this doesn't work!! it says setheaderbuttons is not defined. need to check
-        // news app's saving function to see how that fits in with the diff structure
-        $scope.$watch(DetectChanges.hasChanges, setHeaderButtons);
+        // Generates new gradient on preview
+        $scope.getNewRandomGradient();
+
+        // TODO: Add sign validation logic
+
+        // Save sign logic
+        $scope.saveSign = function(sign) {
+            signs.$add(sign).then(function(ref) {
+                $enplugDashboard.successIndicator('Saved sign! Make another?').then(function() {
+
+                    // Resets the sign to an empty headline
+                    $scope.sign = {
+                        colors: [],
+                        headline: ''
+                    };
+
+                    // Waits till the successIndicator is gone to reset focus to the textfield
+                    setTimeout(function() {
+                        focus('mainTextArea');
+                        $scope.getNewRandomGradient();
+                    }, 1900);
+                });
+
+            }, $enplugDashboard.errorIndicator);
+        };
+
+        // Route to signs view
+        function viewSigns() {
+            $location.path('/');
+        }
+
+        // Route to create view - BUT don't need this - they're already here
+        // TODO: Check to see if we can switch headerbuttons without using $watch/DetectChanges
+        function goToCreateSign() {
+            $location.path('/create');
+        }
+
+        // Set header buttons
+        $enplugDashboard.setHeaderButtons([{
+            text: 'My Signs',
+            action: viewSigns,
+            class: 'btn-default ion-android-list'
+        }, {
+            text: 'Create',
+            action: goToCreateSign,
+            class: 'btn-default ion-android-color-palette',
+            disabled: true
+        }]);
         
-    }
-);
+    });
