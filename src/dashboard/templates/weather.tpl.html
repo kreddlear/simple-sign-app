@@ -1,55 +1,30 @@
 <form class="form-material sign-preview">
     <div class="row">
-        <div class="col-md-3 section-summary">
-            <h3>Write your Sign</h3>
-            <p>Customize your new sign by typing in whatever text you'd like to appear on the screen.</p>
-            <p><a href="http://support.enplug.com/hc/en-us/articles/201437329-About-the-Weather-App" target="_blank">Learn more</a></p>
-        </div>
-        <div class="col-md-9">
-            <div class="card">
+        <div class="col-sm-9">
+            <div class="card sign-creator">
                 <div class="card-content">
+                    <h2 class="text-center">New Sign</h2>
                     <div class="row">
-                        <div ng-class="landscapePreview ? 'col-sm-5' : 'col-md-6'">
-                            
-                            <div id="searchBoxParent" class="mt-lg"></div>
-                            <!-- from Directory app header title entry -->
-                            <input ng-model="signtext.headline"
-                                            type="text"
-                                            class="mt-sm pb"
-                                            field="headerAsset.Value.Title"
-                                            label="Enter title text">
-                            </input>
-                            <label >
-                            </label>
-
-                            <p class="text-md text-g">Text must be less than 80 characters.</p>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <!-- <label for="comment">Comment:</label> -->
+                                <textarea ng-model="sign.headline" field="headerAsset.Value.Title" class="form-control" rows="15" id="comment" maxlength=180 focus-on="mainTextArea" placeholder="Say anything you\'d like to say!"></textarea>
+                            </div>
                         </div>
-
                         <!-- Preview container -->
-                        <div class="col-md-6">
-                            <!-- need to replace this with preview for sign -->
-                            <!-- copied the code for landscape vs portrait preview from directory -->
-                            <div class="preview" ng-class="landscapePreview ? 'col-sm-7' : 'col-sm-6'">
-                                <div class="preview-wrapper" ng-class="landscapePreview ? 'landscape' : 'portrait'">
-                                    
-                                    <!-- landscape preview -->
-                                    <!-- removed table etc - need to remove other styling code that pulls in from the entered assets (altho we might use that later if they want to set the color) -->
-                                    <!-- this just needs to point to the titletext -->
-                                    <!-- Styling set in app.scss -->
-                                    <div class="landscape-preview" ng-if="landscapePreview" ng-style="{ 'background-color': 'aqua' }">
-                                        <div class="title"><span>{{ signtext.headline | limitTo: 80 }}</span></div>
+                        <div class="col-md-8">
+                            <div class="preview-container">
+                                <div class="preview">
+                                    <div class="preview-wrapper" ng-class="landscapePreview ? 'portrait' : 'landscape'">
+                                        <!-- landscape preview -->
+                                        <div class="landscape-preview" ng-if="landscapePreview" ng-style="previewGradient">
+                                            <span class="title" style="white-space: pre-wrap;">{{ sign.headline  | limitTo: 180 }}</span>
+                                        </div>
+                                        <!-- portrait preview -->
+                                        <div class="portrait-preview" ng-if="!landscapePreview" ng-style="previewGradient">
+                                            <span class="title">{{ sign.headline  | limitTo: 180 }}</span>
+                                        </div>
                                     </div>
-
-                                    <!-- portrait preview -->
-                                    <!-- removed table etc - need to remove other styling code that pulls in from the entered assets (altho we might use that later if they want to set the color) -->
-                                    <!-- this just needs to point to the titletext -->
-                                    <!-- Styling set in app.scss -->
-                                    <div class="portrait-preview" ng-if="!landscapePreview" ng-style="{ 'background-color': 'black'}">
-                                        <div class="title"><span>{{ signtext.headline | limitTo: 80 }}</span></div>
-                                    </div>
-
-                                    <!-- This allows them to choose whether it's landscape or portrait. Should we get their screen orientation automatically instead? -->
-                                    <p class="tc mt-lg">Preview: <a ng-click="landscapePreview = true">Landscape</a> or <a ng-click="landscapePreview = false">Portrait</a></p>
                                 </div>
                             </div>
                         </div>
@@ -57,5 +32,31 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+            <div class="card card-aside">
+                <h4>Preview Orientation</h4>
+                <!-- This allows them to choose whether it's landscape or portrait. Should we get their screen orientation automatically instead? -->
+                <div class="card-content pv bb" style="display: flex; flex-flow: center;">
+                    <div class="text-center style=" margin: auto;padding-top: 10px;padding-bottom: 10px; "" style="margin: auto;">
+                        <a ng-click="landscapePreview = true">Landscape</a> | <a ng-click="landscapePreview = false">Portrait</a></div>
+                    <br>
+                </div>
+            </div>
+            <div class="card card-aside">
+                <h4>Get New Color</h4>
+                <div class="card-content pv bb" style="display: flex; flex-flow: center;">
+                    <div class="text-center" style="margin: auto;">
+                        <button type="button" ng-click="getNewRandomGradient()" class="btn btn-primary btn-circle btn-lg ion-ios-color-wand-outline"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content pv bb" style="display: flex; flex-flow: center;">
+                <div class="text-center" style="margin: auto;">
+                    <button class="btn btn-lg btn-primary" ng-click="saveSign(sign)" >Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     </div>
 </form>
