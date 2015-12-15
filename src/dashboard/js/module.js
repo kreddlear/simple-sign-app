@@ -4,7 +4,6 @@ angular.module('simple-sign', [
     'dashboard-web-page-app-templates', 
     'enplug.sdk',
     'enplug.sdk.utils',
-    'enplug.utils',
     'ngRoute',
     'ngMessages',
     'firebase'
