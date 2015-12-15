@@ -1,7 +1,6 @@
 angular.module('simple-sign', [
 //   TODO
 //   [] Test to see which app templates dep we need 
-    'dashboard-weather-app-templates',
     'dashboard-web-page-app-templates', 
     'enplug.sdk',
     'enplug.sdk.utils',

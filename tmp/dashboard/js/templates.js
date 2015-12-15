@@ -1,4 +1,4 @@
-angular.module('dashboard-weather-app-templates', []).run(['$templateCache', function($templateCache) {
+angular.module('dashboard-web-page-app-templates', []).run(['$templateCache', function($templateCache) {
   $templateCache.put("dashboard/templates/searchbox.tpl",
     "<div class=\"row\">\n" +
     "    <div class=\"col-md-12\">\n" +
@@ -8,36 +8,58 @@ angular.module('dashboard-weather-app-templates', []).run(['$templateCache', fun
     "    </div>\n" +
     "</div>\n" +
     "");
-  $templateCache.put("dashboard/templates/weather.content.tpl",
-    "<table class=\"table table--hover table--condensed table--open\" st-table=\"syncedGraphics\" st-safe-src=\"graphics\" st-set-sort=\"stNestedSort\">\n" +
-    "    <thead>\n" +
-    "        <tr>\n" +
-    "            <th style=\"width: 50px;\">\n" +
-    "                <material-checkbox>\n" +
-    "                    <input type=\"checkbox\" ng-checked=\"selected.length && selected.length === graphics.length\" ng-click=\"selectAll()\">\n" +
-    "                </material-checkbox>\n" +
-    "            </th>\n" +
-    "            <th st-sort=\"Value.Name\">Name</th>\n" +
-    "            <th st-sort=\"Value.Mimetype\">Color</th>\n" +
-    "            <th style=\"width: 50px;\"></th>\n" +
-    "        </tr>\n" +
-    "    </thead>\n" +
-    "    <tbody>\n" +
-    "        <tr ng-repeat=\"slide in signs | orderBy:orderBy\">\n" +
-    "            <td>\n" +
-    "                <material-checkbox>\n" +
-    "                    <input type=\"checkbox\" ng-checked=\"selected.indexOf(graphic.Id) > -1\" ng-click=\"select(graphic.Id)\">\n" +
-    "                </material-checkbox>\n" +
-    "            </td>\n" +
-    "            <td>\n" +
-    "                <div>{{ slide.headline }}</div>\n" +
-    "            </td>\n" +
-    "            <td>\n" +
-    "                <div>{{ slide.color }}</div>\n" +
-    "            </td>\n" +
-    "        </tr>\n" +
-    "    </tbody>\n" +
-    "</table>    \n" +
+  $templateCache.put("dashboard/templates/signs.tpl",
+    "<div class=\"container\">\n" +
+    "    <div class=\"blank-slate\" ng-if=\"!signs.length\">\n" +
+    "        <i class=\"text-gray-light icon ion-android-color-palette\"></i>\n" +
+    "        <h2>You haven't added signs yet!</h2>\n" +
+    "        <div class=\"card-content pv bb\" style=\"display: flex; flex-flow: center;\">\n" +
+    "            <div class=\"text-center\" style=\"margin: auto;\">\n" +
+    "                <a href=\"#/create\">\n" +
+    "                    <button class=\"btn btn-lg btn-primary\">Create a Sign</button>\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\" ng-if=\"signs.length\">\n" +
+    "        <div class=\"col-sm-3 section-summary\">\n" +
+    "            <h3>Your Signs</h3>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-sm-9\">\n" +
+    "            <div class=\"card card-form\">\n" +
+    "                <div class=\"card-content\">\n" +
+    "                    <table class=\"table\">\n" +
+    "                        <thead>\n" +
+    "                            <tr>\n" +
+    "                                <th>Sign Text</th>\n" +
+    "                            </tr>\n" +
+    "                        </thead>\n" +
+    "                        <tbody>\n" +
+    "                            <tr ng-repeat=\"sign in signs\">\n" +
+    "                                <td>\n" +
+    "                                    <span ng-bind=\"sign.headline\"></span>\n" +
+    "                                </td>\n" +
+    "                            </tr>\n" +
+    "                        </tbody>\n" +
+    "                    </table>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\" ng-if=\"signs.length\">\n" +
+    "        <div class=\"col-sm-3 section-summary\">\n" +
+    "            <h3>SimpleSign URL</h3>\n" +
+    "            <p>Preview your SimpleSign slideshow in your browser.</p>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-sm-9\">\n" +
+    "            <div class=\"card card-form\">\n" +
+    "                <div class=\"card-content\">\n" +
+    "                    <a ng-href=\"http://simplesign.firebaseapp.com/#/display/{{accountId}}\" target=\"_blank\">View Your Slideshow Preview</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
     "");
   $templateCache.put("dashboard/templates/weather.tpl",
     "<form class=\"form-material sign-preview\">\n" +
