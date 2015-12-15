@@ -1,5 +1,5 @@
 angular.module('simple-sign', [
-    'dashboard-weather-app-templates',
+    'dashboard-weather-app-templates', 
     'enplug.sdk',
     'enplug.sdk.utils',
     'enplug.utils',
