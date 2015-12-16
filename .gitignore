@@ -5,3 +5,4 @@ dist/
 tmp/
 *.sublime-workspace
 *.sublime-project
+firebase.json
