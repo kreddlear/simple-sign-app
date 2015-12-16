@@ -1,0 +1,57 @@
+<form class="form-material sign-preview">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="card sign-creator">
+                <div class="card-content">
+                    <h2 class="text-center">New Sign</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <textarea ng-model="sign.headline" field="headerAsset.Value.Title" class="form-control" rows="15" id="comment" maxlength=180 focus-on="mainTextArea"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="preview-container">
+                                <div class="preview">
+                                    <div class="preview-wrapper" ng-class="landscapePreview ? 'landscape' : 'portrait'">
+                                        <div class="landscape-preview" ng-if="landscapePreview" ng-style="previewGradient">
+                                            <span class="title" style="white-space: pre-wrap;">{{ sign.headline  | limitTo: 180 }}</span>
+                                        </div>
+                                        <div class="portrait-preview" ng-if="!landscapePreview" ng-style="previewGradient">
+                                            <span class="title">{{ sign.headline  | limitTo: 180 }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card card-aside">
+                <h4>Preview Orientation</h4>
+                <div class="card-content pv bb" style="display: flex; flex-flow: center;">
+                    <div class="text-center style=" margin: auto;padding-top: 10px;padding-bottom: 10px; "" style="margin: auto;">
+                        <a ng-click="landscapePreview = true">Landscape</a> | <a ng-click="landscapePreview = false">Portrait</a></div>
+                    <br>
+                </div>
+            </div>
+            <div class="card card-aside">
+                <h4>Get New Color</h4>
+                <div class="card-content pv bb" style="display: flex; flex-flow: center;">
+                    <div class="text-center" style="margin: auto;">
+                        <button type="button" ng-click="getNewRandomGradient()" class="btn btn-primary btn-circle btn-lg ion-ios-color-wand-outline"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content pv bb" style="display: flex; flex-flow: center;">
+                <div class="text-center" style="margin: auto;">
+                    <button class="btn btn-lg btn-primary" ng-click="saveSign(sign)">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</form>

@@ -1,65 +1,58 @@
-angular.module('weather', [
-    'dashboard-weather-app-templates',
+angular.module('simple-sign', [
+//   TODO
+//   [] Test to see which app templates dep we need 
+    'dashboard-web-page-app-templates', 
     'enplug.sdk',
     'enplug.sdk.utils',
-    'enplug.utils',
     'ngRoute',
     'ngMessages',
-    'uiGmapgoogle-maps',
     'firebase'
 ]);
 
-angular.module('weather').config(function ($routeProvider, $locationProvider) {
+angular.module('simple-sign').config(function ($routeProvider, $locationProvider) {
     'use strict';
 
     $locationProvider.html5Mode(false);
 
     $routeProvider
         .when('/', {
-            templateUrl: 'dashboard/templates/weather.tpl',
-            controller: 'WeatherAppSettingsController',
+            templateUrl: 'dashboard/templates/signs.tpl',
+            controller: 'SignsController',
             resolve: {
-                settings: function (WeatherService) {
-                    return WeatherService.loadSettings();
+                pages: function(WebPageService) {
+                    return WebPageService.loadWebPages();
+                },
+                accountId: function(WebPageService) {
+                    return WebPageService.getAccount().then(function(account) {
+                        return account.accountId;
+                    });
                 }
             }
         })
-        .when('/content', {
-            templateUrl: 'dashboard/templates/weather.content.tpl',
-            controller: 'WeatherAppContentController',
-            // Likely that we don't need the resolve, since we won't have a service
+        .when('/create', {
+            templateUrl: 'dashboard/templates/sign-creator.tpl',
+            controller: 'SignCreatorController',
             resolve: {
+                page: function() {
+                    return null;
+                },
+                accountId: function(WebPageService) {
+                    return WebPageService.getAccount().then(function(account) {
+                        return account.accountId;
+
+                    });
+                }
             }
         })
 });
 
-angular.module('weather').run(function (Environment, EndpointOptions, $enplugAccount, $route,
-                                            Endpoints, $rootScope) {
-    'use strict';
-
-    // Make weather-app-specific endpoints available
-    EndpointOptions.setEndpoints(Endpoints);
-
-    // Locks routes from resolving
-    var isPaused = true;
-
-    $enplugAccount.getAccount().then(function (account) {
-
-        // Set information from dashboard
-        Environment.setEnvironment(account.env);
-
-        // account details required in multiple locations
-        $rootScope.account = account;
-        EndpointOptions.setPersistentParam('token', account.token);
-
-        // Release lock and trigger route resolution
-        isPaused = false;
-        $route.reload();
-    });
-
-    $rootScope.$on('$routeChangeStart', function (event) {
-        if (isPaused) {
-            event.preventDefault();
+angular.module('simple-sign').directive('autoFocus', function($timeout) {
+    return {
+        restrict: 'AC',
+        link: function(_scope, _element) {
+            $timeout(function(){
+                _element[0].focus();
+            }, 0);
         }
-    });
+    };
 });
