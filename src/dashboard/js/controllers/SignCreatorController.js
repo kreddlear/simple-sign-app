@@ -8,7 +8,7 @@ angular.module('simple-sign').controller('SignCreatorController',
         var signs = $firebaseArray(signsRef);
 
         // Set header title breadcrumb
-        $enplugDashboard.setHeaderTitle('Add website');
+        $enplugDashboard.setHeaderTitle('New sign');
 
         // Focuses on the sign textbox
         focus('mainTextArea');
