@@ -17,20 +17,11 @@
         <div class="col-sm-9">
             <div class="card card-form">
                 <div class="card-content">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Sign Text</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="sign in signs">
-                                <td>
-                                    <span ng-bind="sign.headline"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h3>Sign Text</h3>
+                    <div ng-repeat="sign in signs" class="signs-view-headline-cell" ng-style='{"background": "linear-gradient(to top left," + sign.colors[0] + ", " + sign.colors[1] + ")"}'>
+                        <span ng-hide="sign.headline.length > 46">{{ sign.headline | limitTo: 47 }}</span>
+                        <span ng-show="sign.headline.length > 46" style="-webkit-mask-image: -webkit-gradient(linear, 75% 0, 100% 0, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));">{{ sign.headline | limitTo: 47 }}</span>
+                    </div>
                 </div>
             </div>
         </div>
