@@ -19,7 +19,8 @@ angular.module('simple-sign').controller('SignsController',
             var promise;
 
             // URL composed of base URL + the accountId
-            page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + accountId;
+            page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + accountId.toString() + "/";
+            console.log(page.Value.Url);
 
             // Create the asset with the display URL (this will only happen the first time the app is initialized)
             promise = WebPageService.createWebPage(page);
