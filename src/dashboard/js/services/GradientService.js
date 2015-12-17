@@ -1,4 +1,6 @@
 angular.module('simple-sign').factory('GradientService', function() {
+    
+    // Collection of gradient color pairs by github.com/Ghosh/uiGradients/
     var gradients = [{
         "name": "Intuitive Purple",
         "colors": ["#DA22FF", "#9733EE"]
@@ -390,6 +392,7 @@ angular.module('simple-sign').factory('GradientService', function() {
         "name": "Nighthawk",
         "colors": ["#2980b9", "#2c3e50"]
     }];
+    
 
     function getGradientByName(name) {
         return gradients.filter(function(gradient) {
