@@ -1,30 +1,22 @@
 angular.module('simple-sign').controller('SignsController',
-    function($scope, SignService, pages, accountId, $log, $enplugDashboard, $location, $firebaseArray) {
+    function($scope, SignService, signs, accountId, $log, $enplugDashboard, $location, $firebaseArray) {
         "use strict";
 
         $enplugDashboard.pageLoading(false);
 
-        // If no assets/pages exist, create an asset 
-        if (!pages.length) {
+        // If no assets/signs exist, create an asset
+        //TODO - You don't need to explicitly call length
+        if (!signs) {
 
-            // Initialize page object. This object will eventually be the asset
-            var page = {
-                Value: {
-                    ShowContent: 'url',
-                    Url: null,
-                    _friendlyName: null
-                }
-            };
-
-            var promise;
+            // Initialize sign object. This object will eventually be the asset
+            var sign = SignService.newSign();
 
             // URL composed of base URL + the accountId
-            page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + accountId.toString() + "/";
-            console.log(page.Value.Url);
+            sign.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + accountId.toString() + "/";
+            console.log(sign.Value.Url);
 
             // Create the asset with the display URL (this will only happen the first time the app is initialized)
-            promise = WebPageService.createWebPage(page);
-            promise.then(function() {
+            SignService.createSign(sign).then(function() {
                 $enplugDashboard.successIndicator('Created new Simple Sign collection.').then(function() {
                     
                     // Routes to signs view
@@ -33,27 +25,7 @@ angular.module('simple-sign').controller('SignsController',
             }, $enplugDashboard.errorIndicator);
         }
 
-        // Give the Scope the accountId to create the URL with. See signs template for implementation
-        $scope.accountId = accountId;
-        
-        // Firebase
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
-
-        $scope.signs = $firebaseArray(signsRef);
-
-
         // Header buttons
-
-        // Route to signs in response to click of My Signs header button
-        function viewSigns() {
-            $location.path('/');
-        }
-
-        // Route to create in response to click of Create header button
-        function goToCreateSign() {
-            $location.path('/create');
-        }
-
         $enplugDashboard.setHeaderButtons([{
             text: 'My Signs',
             action: viewSigns,
@@ -64,4 +36,22 @@ angular.module('simple-sign').controller('SignsController',
             action: goToCreateSign,
             class: 'btn-default ion-android-color-palette'
         }]);
+
+        // Give the Scope the accountId to create the URL with. See signs template for implementation
+        $scope.accountId = accountId;
+        
+        // Firebase
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
+
+        $scope.signs = $firebaseArray(signsRef);
+
+        // Route to signs in response to click of My Signs header button
+        function viewSigns() {
+            $location.path('/');
+        }
+
+        // Route to create in response to click of Create header button
+        function goToCreateSign() {
+            $location.path('/create');
+        }
     });

@@ -11,17 +11,6 @@ angular.module('simple-sign').factory('SignService', function ($log, $enplugAcco
                 Value: {
                     ShowContent: 'url',
                     Url: null,
-                    OverrideUserAgent: false,
-                    ShowMobileSite: null,
-                    ShowDelay: null,
-                    RefreshInterval: null,
-                    RequireRefresh: false,
-                    AllowJavascript: true,
-                    Username: null,
-                    Password: null,
-                    Token: null,
-                    JavascriptOnload: null,
-                    Scale: 100,
                     _friendlyName: null
                 }
             };
