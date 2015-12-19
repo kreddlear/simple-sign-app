@@ -1,5 +1,5 @@
 angular.module('simple-sign').controller('SignCreatorController',
-    function($scope, WebPageService, page, accountId, DetectChanges, $location, $enplugDashboard, $firebaseArray, focus, GradientService) {
+    function($scope, SignService, page, accountId, DetectChanges, $location, $enplugDashboard, $firebaseArray, focus, GradientService) {
         'use strict';
 
         //Firebase url + array declaration

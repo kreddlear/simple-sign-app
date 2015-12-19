@@ -1,5 +1,5 @@
 angular.module('simple-sign').controller('SignsController',
-    function($scope, WebPageService, pages, accountId, $log, $enplugDashboard, $location, $firebaseArray) {
+    function($scope, SignService, pages, accountId, $log, $enplugDashboard, $location, $firebaseArray) {
         "use strict";
 
         $enplugDashboard.pageLoading(false);

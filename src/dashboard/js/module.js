@@ -20,7 +20,7 @@ angular.module('simple-sign').config(function ($routeProvider, $locationProvider
             controller: 'SignsController',
             resolve: {
                 pages: function(WebPageService) {
-                    return WebPageService.loadWebPages();
+                    return WebPageService.loadSigns();
                 },
                 accountId: function(WebPageService) {
                     return WebPageService.getAccount().then(function(account) {
