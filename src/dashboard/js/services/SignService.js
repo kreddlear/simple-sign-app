@@ -5,14 +5,21 @@ angular.module('simple-sign').factory('SignService', function ($log, $enplugAcco
 
     return {
 
-        //TODO - I would make the newSign and have it be the 'standard' object you need for a sign
-        newSign: function () {
+        //TODO - I would make the newSignAsset and have it be the 'standard' object you need for a sign
+        newSignAsset: function () {
             return {
                 Value: {
                     ShowContent: 'url',
                     Url: null,
                     _friendlyName: null
                 }
+            };
+        },
+
+        newSign: function () {
+            return {
+                colors: [],
+                headline: ''
             };
         },
 

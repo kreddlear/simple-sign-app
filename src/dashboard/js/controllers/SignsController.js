@@ -9,7 +9,7 @@ angular.module('simple-sign').controller('SignsController',
         if (!signs) {
 
             // Initialize sign object. This object will eventually be the asset
-            var sign = SignService.newSign();
+            var sign = SignService.newSignAsset();
 
             // URL composed of base URL + the accountId
             sign.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + accountId.toString() + "/";
