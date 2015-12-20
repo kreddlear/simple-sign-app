@@ -45,11 +45,11 @@ angular.module('simple-sign').factory('SignService', function ($log, $enplugAcco
                 signs.forEach(function (sign) {
                     if (sign.Value.Url === null) {
                         console.log('skipping null asset');
+                    } else {
+                        console.log('Sign: ', sign);
+                        sign._created = moment(sign.Created).format('MMM DD, YYYY');
+                        sign.Value.Name = sign.Value.Name || sign.Value.Url.substring(0, 30);
                     }
-                    else {
-                    sign._created = moment(sign.Created).format('MMM DD, YYYY');
-                    sign.Value.Name = sign.Value.Name || sign.Value.Url.substring(0, 30);
-                }
                 });
                 return signs;
             });

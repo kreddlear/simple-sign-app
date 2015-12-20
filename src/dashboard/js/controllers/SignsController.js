@@ -4,6 +4,10 @@ angular.module('simple-sign').controller('SignsController',
 
         $enplugDashboard.pageLoading(false);
 
+        $scope.createSign = function () {
+            $location.path('/create');
+        };
+
         // If no assets/signs exist, create an asset
         //TODO - You don't need to explicitly call length
         if (!signs) {
