@@ -1,5 +1,5 @@
 angular.module('simple-sign').controller('SignCreatorController',
-    function($scope, SignService, page, accountId, DetectChanges, $location,
+    function($scope, SignService, sign, accountId, DetectChanges, $location,
              $enplugDashboard, $firebaseArray, focus, GradientService) {
         'use strict';
 
