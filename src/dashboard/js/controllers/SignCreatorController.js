@@ -69,14 +69,13 @@ angular.module('simple-sign').controller('SignCreatorController',
 
         // Save sign logic
         $scope.saveSign = function(sign) {
+            $enplugDashboard.loadingIndicator('Saving Sign');
+
             signs.$add(sign).then(function(ref) {
                 $enplugDashboard.successIndicator('Saved sign! Make another?').then(function() {
 
                     // Resets the sign to an empty headline
-                    $scope.sign = {
-                        colors: [],
-                        headline: ''
-                    };
+                    $scope.sign = SignService.newSign();
 
                     // Waits till the successIndicator is gone to reset focus to the textfield
                     setTimeout(function() {
