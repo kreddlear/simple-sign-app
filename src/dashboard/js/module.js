@@ -19,11 +19,11 @@ angular.module('simple-sign').config(function ($routeProvider, $locationProvider
             templateUrl: 'dashboard/templates/signs.tpl',
             controller: 'SignsController',
             resolve: {
-                pages: function(WebPageService) {
-                    return WebPageService.loadWebPages();
+                signs: function(SignService) {
+                    return SignService.loadSigns();
                 },
-                accountId: function(WebPageService) {
-                    return WebPageService.getAccount().then(function(account) {
+                accountId: function(SignService) {
+                    return SignService.getAccount().then(function(account) {
                         return account.accountId;
                     });
                 }
@@ -33,11 +33,11 @@ angular.module('simple-sign').config(function ($routeProvider, $locationProvider
             templateUrl: 'dashboard/templates/sign-creator.tpl',
             controller: 'SignCreatorController',
             resolve: {
-                page: function() {
+                sign: function() {
                     return null;
                 },
-                accountId: function(WebPageService) {
-                    return WebPageService.getAccount().then(function(account) {
+                accountId: function(SignService) {
+                    return SignService.getAccount().then(function(account) {
                         return account.accountId;
 
                     });
