@@ -42,6 +42,7 @@ angular.module('simple-sign').controller('SignCreatorController',
         // Save sign logic
         $scope.saveSign = function(sign) {
             signs.$add(sign).then(function(ref) {
+                $enplugDashboard.loadingIndicator('Saving Sign');
                 $enplugDashboard.successIndicator('Saved sign! Make another?').then(function() {
 
                     // Resets the sign to an empty headline
