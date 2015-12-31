@@ -21,12 +21,18 @@
                         <thead>
                             <tr>
                                 <th>Sign Text</th>
+                                <th>Delete</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="sign in signs">
                                 <td>
                                     <span ng-bind="sign.headline"></span>
+                                </td>
+                                <!-- Remove button -->
+                                <td>
+                                    <button class="btn btn-default btn-icon btn-sm ion-trash-a" ng-click="deleteSign(sign)"></button>
                                 </td>
                             </tr>
                         </tbody>

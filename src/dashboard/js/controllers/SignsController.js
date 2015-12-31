@@ -64,4 +64,16 @@ angular.module('simple-sign').controller('SignsController',
             action: goToCreateSign,
             class: 'btn-default ion-android-color-palette'
         }]);
+
+        $scope.deleteSign = function(sign) {
+            // added $scope in here because otherwise it didn't recognize signs
+            // TODO: move this to service, remove $scope maybe?
+            $scope.signs.$remove(sign).then(function(ref) {
+                $enplugDashboard.loadingIndicator('Deleting Sign');
+                // should this be the success indicator?
+                $enplugDashboard.successIndicator('Deleted sign!').then(function() {
+
+                });
+            }, $enplugDashboard.errorIndicator);
+        };
     });
