@@ -1,3 +1,74 @@
+<style>
+body {
+    color: #7b7b7b;
+    font-size: 12px;
+    font-family: "Open Sans", Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #333;
+    outline: none !important;
+}
+
+.grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+
+/* Grid item */
+
+.grid__item {
+    padding-left: 30px;
+    margin-top: 1.5em;
+    position: relative;
+    color: inherit;
+    width: 100%;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.grid__item::before {
+    position: absolute;
+    content: '';
+    top: 5px;
+    right: 0px;
+    bottom: 5px;
+    left: 5px;
+    border-bottom: 1px solid rgba(74, 74, 74, 0.075);
+}
+
+.grid__item:hover::before {
+    border-width: 0 0 3px 0;
+    -webkit-border-image: -webkit-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
+    -webkit-border-image: -webkit-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
+    -o-border-image: -o-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
+    -moz-border-image: -moz-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
+}
+
+.sign-row {
+    height: 3.5em;
+}
+</style>
 <div class="container">
     <div class="blank-slate" ng-if="!signs.length">
         <i class="text-gray-light icon ion-android-color-palette"></i>
@@ -17,31 +88,21 @@
         <div class="col-sm-9">
             <div class="card card-form">
                 <div class="card-content">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Sign Text</th>
-                                <th>Delete</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="sign in signs">
-                                <td>
-                                    <span ng-bind="sign.headline"></span>
-                                </td>
-                                <!-- Remove button -->
-                                <td>
-                                    <button class="btn btn-default btn-icon btn-sm ion-trash-a" ng-click="deleteSign(sign)"></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <section class="grid">
+                        <div class="grid__item" ng-repeat="sign in signs">
+                            <div class="row sign-row">
+                                <div class="col-md-10"> <h2 class="title title--preview" ng-bind="sign.headline"></h2>
+                                </div>
+                                <div class="col-md-2"> <span class="btn btn-default btn-icon btn-sm ion-trash-a pull-right delete-sign-button" ng-click="deleteSign(sign)"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" ng-if="signs.length">
+    <div class="row sign-row" ng-if="signs.length">
         <div class="col-sm-3 section-summary">
             <h3>Preview</h3>
             <p>Preview your SimpleSign slideshow.</p>
@@ -50,7 +111,7 @@
             <div class="card card-form">
                 <div class="card-content pv bb" style="display: flex; flex-flow: center;">
                     <div class="text-center" style="margin: auto;">
-                    <a class="btn btn-primary" ng-href="http://simplesign.firebaseapp.com/#/display/{{accountId}}" target="_blank"><span>View Preview  <i class="ion-android-open"></i></span></a>
+                        <a class="btn btn-primary" ng-href="http://simplesign.firebaseapp.com/#/display/{{accountId}}" target="_blank"><span>View Preview  <i class="ion-android-open"></i></span></a>
                     </div>
                 </div>
             </div>
