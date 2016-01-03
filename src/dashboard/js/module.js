@@ -22,9 +22,14 @@ angular.module('simple-sign').config(function ($routeProvider, $locationProvider
                 pages: function(WebPageService) {
                     return WebPageService.loadWebPages();
                 },
-                accountId: function(WebPageService) {
+                account: function(WebPageService) {
                     return WebPageService.getAccount().then(function(account) {
-                        return account.accountId;
+                        return account;
+                    });
+                },                
+                displayGroup: function(WebPageService) {
+                    return WebPageService.getDisplayGroup().then(function(displayGroup) {
+                        return displayGroup;
                     });
                 }
             }
@@ -33,13 +38,14 @@ angular.module('simple-sign').config(function ($routeProvider, $locationProvider
             templateUrl: 'dashboard/templates/sign-creator.tpl',
             controller: 'SignCreatorController',
             resolve: {
-                page: function() {
-                    return null;
-                },
-                accountId: function(WebPageService) {
+                account: function(WebPageService) {
                     return WebPageService.getAccount().then(function(account) {
-                        return account.accountId;
-
+                        return account;
+                    });
+                },
+                displayGroup: function(WebPageService) {
+                    return WebPageService.getDisplayGroup().then(function(displayGroup) {
+                        return displayGroup;
                     });
                 }
             }

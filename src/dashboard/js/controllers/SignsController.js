@@ -1,5 +1,5 @@
 angular.module('simple-sign').controller('SignsController',
-    function($scope, WebPageService, pages, accountId, $log, $enplugDashboard, $location, $firebaseArray) {
+    function($scope, WebPageService, pages, account, displayGroup, $log, $enplugDashboard, $location, $firebaseArray) {
         "use strict";
 
         $enplugDashboard.pageLoading(false);
@@ -18,8 +18,8 @@ angular.module('simple-sign').controller('SignsController',
 
             var promise;
 
-            // URL composed of base URL + the accountId
-            page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + accountId.toString() + "/";
+            // URL composed of base URL + the display group id
+            page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + account.id + "/";
             console.log(page.Value.Url);
 
             // Create the asset with the display URL (this will only happen the first time the app is initialized)
@@ -45,8 +45,8 @@ angular.module('simple-sign').controller('SignsController',
             class: 'btn-default ion-android-color-palette'
         }]);
 
-        // Give the Scope the accountId to create the URL with. See signs template for implementation
-        $scope.accountId = accountId;
+        // Give the Scope the display group id to create the URL with. See signs template for implementation
+        $scope.displayGroupId = account.id;
 
         // Route to signs in response to click of My Signs header button
         function viewSigns() {
@@ -59,7 +59,7 @@ angular.module('simple-sign').controller('SignsController',
         }
  
         // Firebase
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides");
 
         $scope.signs = $firebaseArray(signsRef);       
 
