@@ -33,27 +33,7 @@ angular.module('simple-sign').controller('SignsController',
             }, $enplugDashboard.errorIndicator);
         }
 
-        // Give the Scope the accountId to create the URL with. See signs template for implementation
-        $scope.accountId = accountId;
-        
-        // Firebase
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
-
-        $scope.signs = $firebaseArray(signsRef);
-
-
-        // Header buttons
-
-        // Route to signs in response to click of My Signs header button
-        function viewSigns() {
-            $location.path('/');
-        }
-
-        // Route to create in response to click of Create header button
-        function goToCreateSign() {
-            $location.path('/create');
-        }
-
+        // Header buttons handlers
         $enplugDashboard.setHeaderButtons([{
             text: 'My Signs',
             action: viewSigns,
@@ -64,6 +44,24 @@ angular.module('simple-sign').controller('SignsController',
             action: goToCreateSign,
             class: 'btn-default ion-android-color-palette'
         }]);
+
+        // Give the Scope the accountId to create the URL with. See signs template for implementation
+        $scope.accountId = accountId;
+
+        // Route to signs in response to click of My Signs header button
+        function viewSigns() {
+            $location.path('/');
+        }
+
+        // Route to create in response to click of Create header button
+        function goToCreateSign() {
+            $location.path('/create');
+        }
+ 
+        // Firebase
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
+
+        $scope.signs = $firebaseArray(signsRef);       
 
         $scope.deleteSign = function(sign) {
             // added $scope in here because otherwise it didn't recognize signs
