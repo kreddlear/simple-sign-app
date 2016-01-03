@@ -32,16 +32,39 @@
             <div class="card card-aside">
                 <h4>Preview Orientation</h4>
                 <div class="card-content pv bb" style="display: flex; flex-flow: center;">
-                    <div class="text-center style=" margin: auto;padding-top: 10px;padding-bottom: 10px; "" style="margin: auto;">
+                    <div class="text-center" style=" margin: auto;padding-top: 10px;padding-bottom: 10px;">
                         <a ng-click="landscapePreview = true">Landscape</a> | <a ng-click="landscapePreview = false">Portrait</a></div>
                     <br>
                 </div>
             </div>
             <div class="card card-aside">
-                <h4>Get New Color</h4>
-                <div class="card-content pv bb" style="display: flex; flex-flow: center;">
-                    <div class="text-center" style="margin: auto;">
+                <h4>New Background Type</h4>
+                <div class="card-content pv bb" style="margin:auto; padding-top: 10px; padding-bottom: 10px;">
+                    <div class="radio">
+                        <label>Gradient
+                            <input type="radio" name="backgroundTypes" ng-value="backgroundType[0]" ng-model="gradientBackground">
+                            <span class="radio-on"></span>
+                            <span class="radio-off"></span>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>Color
+                            <input type="radio" name="backgroundTypes" ng-value="backgroundType[1]" ng-model="gradientBackground">
+                            <span class="radio-on"></span>
+                            <span class="radio-off"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card-content pv bb" style="display:flex; flex-flow: center;">
+                    <div class="text-center" ng-show="gradientBackground"
+                        style="margin: auto;">
                         <button type="button" ng-click="getNewRandomGradient()" class="btn btn-primary btn-circle btn-lg ion-ios-color-wand-outline"></button>
+                    </div>
+                    <div class="text-center" ng-show="!gradientBackground" style="margin:auto;">
+                        <color-picker class="mt-lg" ng-model="sign.colors[0]" ng-change="getBackgroundColor()">
+                        Background Color
+                        </color-picker>
                     </div>
                 </div>
             </div>
@@ -51,7 +74,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 </form>
