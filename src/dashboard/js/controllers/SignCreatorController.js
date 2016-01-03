@@ -1,11 +1,11 @@
 angular.module('simple-sign').controller('SignCreatorController',
-    function($scope, WebPageService, page, accountId, DetectChanges, $location, $enplugDashboard, $firebaseArray, focus, GradientService) {
+    function($scope, WebPageService, page, accountId, DetectChanges, $location,
+        $enplugDashboard, $firebaseArray, focus, GradientService) {
         'use strict';
 
         //Firebase url + array declaration
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
-
-        var signs = $firebaseArray(signsRef);
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides"),
+        signs = $firebaseArray(signsRef);
 
         // Set header title breadcrumb
         $enplugDashboard.setHeaderTitle('New sign');
@@ -87,7 +87,7 @@ angular.module('simple-sign').controller('SignCreatorController',
 
         // Route to create view - BUT don't need this - they're already here
         // TODO: Check to see if we can switch headerbuttons without using $watch/DetectChanges
-        function goToCreateSign() {
+        function createSign() {
             $location.path('/create');
         }
 
@@ -98,7 +98,7 @@ angular.module('simple-sign').controller('SignCreatorController',
             class: 'btn-default ion-android-list'
         }, {
             text: 'Create',
-            action: goToCreateSign,
+            action: createSign,
             class: 'btn-default ion-android-color-palette',
             disabled: true
         }]);
