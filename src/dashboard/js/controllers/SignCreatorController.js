@@ -37,6 +37,25 @@ angular.module('simple-sign').controller('SignCreatorController',
         // Generates new gradient on preview
         $scope.getNewRandomGradient();
 
+        // choose gradient generation option first
+        $scope.gradientBackground = true;
+
+        // should this be removed in favor of just ng-value=true/false?
+        // keeping it for now - may want to add image upload
+        $scope.backgroundType = [ true, false ];
+
+        $scope.getBackgroundColor = function() {
+
+            // set both items in colors array to chosen color
+            $scope.sign.colors[0] = '#' + $scope.sign.colors[0];
+            $scope.sign.colors[1] = $scope.sign.colors[0];
+
+            // adds the colors to the preview
+            $scope.previewGradient = {
+                'background': $scope.sign.colors[0]
+            };
+        }
+
         // TODO: Add sign validation logic
 
         // Save sign logic
