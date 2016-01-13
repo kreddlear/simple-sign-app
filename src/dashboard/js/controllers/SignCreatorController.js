@@ -1,10 +1,14 @@
 angular.module('simple-sign').controller('SignCreatorController',
-    function($scope, WebPageService, page, accountId, DetectChanges, $location,
+    function($scope, WebPageService, account, displayGroup, DetectChanges, $location,
         $enplugDashboard, $firebaseArray, focus, GradientService) {
         'use strict';
 
+        $scope.displayGroupOrientation = displayGroup.orientation;
+
+        console.log('Display Group orientation:', displayGroup.orientation);
+
         //Firebase url + array declaration
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides"),
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides"),
         signs = $firebaseArray(signsRef);
 
         // Set header title breadcrumb

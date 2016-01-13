@@ -32,6 +32,12 @@ angular.module('simple-sign').factory('WebPageService', function ($log, $enplugA
                 return account || $q.reject();
             });
         },
+        getDisplayGroup: function (id) {
+            return $enplugAccount.getDisplayGroup().then(function (displayGroup) {
+                // FIXME: this should actually redirect to "Not found" page using the SDK
+                return displayGroup || $q.reject();
+            });
+        },
         loadWebPage: function (id) {
             return $enplugAccount.getAssets().then(function (pages) {
                 var page = pages.filter(function (_page) { return _page.Id === id; })[0];
@@ -40,7 +46,6 @@ angular.module('simple-sign').factory('WebPageService', function ($log, $enplugA
                 return page || $q.reject();
             });
         },
-
         loadWebPages: function () {
             return $enplugAccount.getAssets().then(function (pages) {
                 pages.forEach(function (page) {
