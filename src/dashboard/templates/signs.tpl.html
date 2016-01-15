@@ -1,4 +1,5 @@
 <style>
+
 body {
     color: #7b7b7b;
     font-size: 12px;
@@ -45,21 +46,13 @@ a:hover {
     flex-direction: column;
     -webkit-justify-content: center;
     justify-content: center;
+    border-bottom: 3px solid rgba(74, 74, 74, 0.075);
+
 }
 
-.grid__item::before {
-    position: absolute;
-    content: '';
-    top: 5px;
-    right: 0px;
-    bottom: 5px;
-    left: 5px;
-    border-bottom: 1px solid rgba(74, 74, 74, 0.075);
-}
 
-.grid__item:hover::before {
-    border-width: 0 0 3px 0;
-    -webkit-border-image: -webkit-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
+.grid__item:hover{
+    border-width: 0 0 3px 0;    -webkit-border-image: -webkit-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
     -webkit-border-image: -webkit-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
     -o-border-image: -o-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
     -moz-border-image: -moz-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
