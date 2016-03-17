@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <textarea ng-model="sign.headline" field="headerAsset.Value.Title" class="form-control" rows="15" id="comment" maxlength=180 focus-on="mainTextArea"></textarea>
+                                <textarea ng-model="sign.headline" field="headerAsset.Value.Title" class="form-control" rows="15" id="comment" maxlength=165 focus-on="mainTextArea"></textarea>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -15,10 +15,10 @@
                                 <div class="preview">
                                     <div class="preview-wrapper" ng-class="landscapePreview ? 'landscape' : 'portrait'">
                                         <div class="landscape-preview" ng-if="landscapePreview" ng-style="previewGradient">
-                                            <span class="title" style="white-space: pre-wrap;">{{ sign.headline  | limitTo: 180 }}</span>
+                                            <span class="title" style="white-space: pre-wrap;">{{ sign.headline  | limitTo: 165 }}</span>
                                         </div>
                                         <div class="portrait-preview" ng-if="!landscapePreview" ng-style="previewGradient">
-                                            <span class="title">{{ sign.headline  | limitTo: 180 }}</span>
+                                            <span class="title">{{ sign.headline  | limitTo: 165 }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -30,15 +30,7 @@
         </div>
         <div class="col-sm-3">
             <div class="card card-aside">
-                <h4>Preview Orientation</h4>
-                <div class="card-content pv bb" style="display: flex; flex-flow: center;">
-                    <div class="text-center" style=" margin: auto;padding-top: 10px;padding-bottom: 10px;">
-                        <a ng-click="landscapePreview = true">Landscape</a> | <a ng-click="landscapePreview = false">Portrait</a></div>
-                    <br>
-                </div>
-            </div>
-            <div class="card card-aside">
-                <h4>New Background Type</h4>
+                <h4>Background Style</h4>
                 <div class="card-content pv bb" style="margin:auto; padding-top: 10px; padding-bottom: 10px;">
                     <div class="radio">
                         <label>Gradient
@@ -48,22 +40,22 @@
                         </label>
                     </div>
                     <div class="radio">
-                        <label>Color
+                        <label>Solid Color
                             <input type="radio" name="backgroundTypes" ng-value="backgroundType[1]" ng-model="gradientBackground">
                             <span class="radio-on"></span>
                             <span class="radio-off"></span>
                         </label>
                     </div>
                 </div>
-
                 <div class="card-content pv bb" style="display:flex; flex-flow: center;">
-                    <div class="text-center" ng-show="gradientBackground"
-                        style="margin: auto;">
-                        <button type="button" ng-click="getNewRandomGradient()" class="btn btn-primary btn-circle btn-lg ion-ios-color-wand-outline"></button>
+                    <div class="text-center" ng-show="gradientBackground" style="margin: auto;">
+                        <button type="button" ng-click="getNewRandomGradient()" class="btn btn-primary btn-circle btn-lg ion-ios-color-wand-outline" style="display: block; margin: auto;"></button>
+                        <div class="text-center"><small style="color: #798c9c;">Click for new colors</small></div>
+
                     </div>
                     <div class="text-center" ng-show="!gradientBackground" style="margin:auto;">
                         <color-picker class="mt-lg" ng-model="sign.colors[0]" ng-change="getBackgroundColor()">
-                        Background Color
+                            Background Color
                         </color-picker>
                     </div>
                 </div>
