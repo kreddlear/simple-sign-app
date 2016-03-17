@@ -2,6 +2,8 @@ angular.module('simple-sign').controller('SignsController',
     function($scope, WebPageService, pages, account, displayGroup, $log, $enplugDashboard, $location, $firebaseArray) {
         "use strict";
 
+        
+
         $enplugDashboard.pageLoading(false);
 
         // If no assets/pages exist, create an asset 
