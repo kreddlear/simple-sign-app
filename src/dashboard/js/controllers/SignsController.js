@@ -22,7 +22,7 @@ angular.module('simple-sign').controller('SignsController',
 
             // URL composed of base URL + the display group id (account.id)
             // see: https://github.com/Enplug/dashboard-sdk#getaccountonsuccess-onerror
-            page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + account.id + "/";
+            page.Value.Url = "https://simplesign-slideshow.firebaseapp.com/#/display/" + account.id + "/";
             console.log(page.Value.Url);
 
             // Create the asset with the display URL (this will only happen the first time the app is initialized)
