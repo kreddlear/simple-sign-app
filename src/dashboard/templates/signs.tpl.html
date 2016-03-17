@@ -47,23 +47,28 @@ a:hover {
     justify-content: center;
 }
 
-.grid__item::before {
-    position: absolute;
-    content: '';
-    top: 5px;
-    right: 0px;
-    bottom: 5px;
-    left: 5px;
-    border-bottom: 1px solid rgba(74, 74, 74, 0.075);
+.grid__item:hover {
+    padding-left: 30px;
+    margin-top: 1.5em;
+    position: relative;
+    color: black;
+    width: 100%;
+    cursor: default;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+    
 }
 
-.grid__item:hover::before {
-    border-width: 0 0 3px 0;
-    -webkit-border-image: -webkit-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
-    -webkit-border-image: -webkit-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
-    -o-border-image: -o-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
-    -moz-border-image: -moz-linear-gradient(linear, 100% 0, 0 0, from(#fc00ff), to(#00dbde)) 100% 1;
-}
+
 
 .sign-row {
     height: 3.5em;
@@ -89,11 +94,16 @@ a:hover {
             <div class="card card-form">
                 <div class="card-content">
                     <section class="grid">
-                        <div class="grid__item" ng-repeat="sign in signs">
+               
+                        <div class="grid__item" ng-repeat="sign in signs" ng-style='{"border-bottom": "3px solid" + sign.colors[1] + ""}'>
+                   
                             <div class="row sign-row">
-                                <div class="col-md-10"> <h2 class="title title--preview" ng-bind="sign.headline"></h2>
+                                <div class="col-xs-11">
+                                    <!-- <h2 class="title title--preview">{{ sign.headline }}</h2> -->
+                                    <span ng-hide="sign.headline.length > 49" style="font-size: 24px;">{{ sign.headline | limitTo: 49 }}</span>
+                                    <span ng-show="sign.headline.length > 49" style="font-size: 24px; -webkit-mask-image: -webkit-gradient(linear, 85% 0, 100% 0, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));">{{ sign.headline | limitTo: 49 }}</span>
                                 </div>
-                                <div class="col-md-2"> <span class="btn btn-default btn-icon btn-sm ion-trash-a pull-right delete-sign-button" ng-click="deleteSign(sign)"></span>
+                                <div class="col-xs-1"> <span class="btn btn-default btn-icon btn-sm ion-trash-a pull-right delete-sign-button" ng-click="deleteSign(sign)"></span>
                                 </div>
                             </div>
                         </div>
@@ -111,8 +121,7 @@ a:hover {
             <div class="card card-form">
                 <div class="card-content pv bb" style="display: flex; flex-flow: center;">
                     <div class="text-center" style="margin: auto;">
-                    <a class="btn btn-primary" ng-href="http://simplesign.firebaseapp.com/#/display/{{displayGroupId}}" target="_blank"><span>View Preview  <i class="ion-android-open"></i></span></a>
-
+                        <a class="btn btn-primary" ng-href="http://simplesign.firebaseapp.com/#/display/{{displayGroupId}}" target="_blank"><span>View Preview  <i class="ion-android-open"></i></span></a>
                     </div>
                 </div>
             </div>

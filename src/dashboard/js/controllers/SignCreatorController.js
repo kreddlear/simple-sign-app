@@ -3,9 +3,11 @@ angular.module('simple-sign').controller('SignCreatorController',
         $enplugDashboard, $firebaseArray, focus, GradientService) {
         'use strict';
 
-        $scope.displayGroupOrientation = displayGroup.orientation;
-
-        console.log('Display Group orientation:', displayGroup.orientation);
+        if (displayGroup.orientation === "Landscape") {
+            $scope.landscapePreview = true;
+        } else {
+            $scope.landscapePreview = false;
+        }
 
         //Firebase url + array declaration
         var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides"),
