@@ -18,7 +18,8 @@ angular.module('simple-sign').controller('SignsController',
 
             var promise;
 
-            // URL composed of base URL + the display group id
+            // URL composed of base URL + the display group id (account.id)
+            // see: https://github.com/Enplug/dashboard-sdk#getaccountonsuccess-onerror
             page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + account.id + "/";
             console.log(page.Value.Url);
 
@@ -47,6 +48,8 @@ angular.module('simple-sign').controller('SignsController',
 
         // Give the Scope the display group id to create the URL with. See signs template for implementation
         $scope.displayGroupId = account.id;
+        console.log("display group id: " + account.id);
+        console.log("display group orientation: " + displayGroup.orientation);
 
         // Route to signs in response to click of My Signs header button
         function viewSigns() {
