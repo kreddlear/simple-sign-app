@@ -1,11 +1,28 @@
 angular.module('simple-sign').controller('SignsController',
-    function($scope, WebPageService, pages, accountId, $log, $enplugDashboard, $location, $firebaseArray) {
+    function($scope, WebPageService, pages, account, displayGroup, $log, $enplugDashboard, $location, $firebaseArray) {
         "use strict";
 
-        $enplugDashboard.pageLoading(false);
+        // Firebase
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides");
+
+        var signs = $firebaseArray(signsRef);
+
+        console.log(pages.length);
+
+        signs.$loaded()
+            .then(function(x) {
+                $enplugDashboard.pageLoading(false);
+                $scope.signs = signs;
+            })
+            .catch(function(error) {
+                console.log("Error:", error);
+            });
+
+        $scope.pages = pages;
+
 
         // If no assets/pages exist, create an asset 
-        if (!pages.length) {
+        $scope.createAsset = function() {
 
             // Initialize page object. This object will eventually be the asset
             var page = {
@@ -18,19 +35,28 @@ angular.module('simple-sign').controller('SignsController',
 
             var promise;
 
-            // URL composed of base URL + the accountId
-            page.Value.Url = "https://simplesign.firebaseapp.com/#/display/" + accountId.toString() + "/";
+            // URL composed of base URL + the display group id (account.id)
+            // see: https://github.com/Enplug/dashboard-sdk#getaccountonsuccess-onerror
+            page.Value.Url = "https://simplesign-slideshow.firebaseapp.com/#/display/" + account.id + "/";
             console.log(page.Value.Url);
 
             // Create the asset with the display URL (this will only happen the first time the app is initialized)
             promise = WebPageService.createWebPage(page);
             promise.then(function() {
                 $enplugDashboard.successIndicator('Created new Simple Sign collection.').then(function() {
-                    
-                    // Routes to signs view
-                    $location.path('/');
+
+                    // Routes to create sign view
+                    $location.path('/create');
+
                 });
             }, $enplugDashboard.errorIndicator);
+
+        }
+
+        // Sign substring
+
+        $scope.getSubstring = function(str) {
+            return str.substring(0, 49);
         }
 
         // Header buttons handlers
@@ -42,11 +68,13 @@ angular.module('simple-sign').controller('SignsController',
         }, {
             text: 'Create',
             action: goToCreateSign,
-            class: 'btn-default ion-android-color-palette'
+            class: 'btn-primary ion-android-color-palette'
         }]);
 
-        // Give the Scope the accountId to create the URL with. See signs template for implementation
-        $scope.accountId = accountId;
+        // Give the Scope the display group id to create the URL with. See signs template for implementation
+        $scope.displayGroupId = account.id;
+        console.log("display group id: " + account.id);
+        console.log("display group orientation: " + displayGroup.orientation);
 
         // Route to signs in response to click of My Signs header button
         function viewSigns() {
@@ -55,13 +83,12 @@ angular.module('simple-sign').controller('SignsController',
 
         // Route to create in response to click of Create header button
         function goToCreateSign() {
+            if (!pages.length) {
+                $scope.createAsset();
+            }
             $location.path('/create');
         }
- 
-        // Firebase
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides");
 
-        $scope.signs = $firebaseArray(signsRef);       
 
         $scope.deleteSign = function(sign) {
             // added $scope in here because otherwise it didn't recognize signs

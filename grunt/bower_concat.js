@@ -5,6 +5,9 @@ module.exports = {
         includeDev: true,
         exclude: [
             'angular' // Included from CDN
-        ]
+        ],
+        mainFiles: {
+        	'jquery-colpick': ['css/colpick.css', 'js/colpick.js']
+        }
     }
 };

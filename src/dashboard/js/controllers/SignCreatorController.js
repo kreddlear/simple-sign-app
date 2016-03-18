@@ -1,11 +1,17 @@
 angular.module('simple-sign').controller('SignCreatorController',
-    function($scope, WebPageService, page, accountId, DetectChanges, $location,
+    function($scope, WebPageService, account, displayGroup, DetectChanges, $location,
         $enplugDashboard, $firebaseArray, focus, GradientService) {
         'use strict';
 
+        if (displayGroup.orientation === "Landscape") {
+            $scope.landscapePreview = true;
+        } else {
+            $scope.landscapePreview = false;
+        }
+
         //Firebase url + array declaration
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + accountId + "/slides"),
-        signs = $firebaseArray(signsRef);
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides"),
+            signs = $firebaseArray(signsRef);
 
         // Set header title breadcrumb
         $enplugDashboard.setHeaderTitle('New sign');
@@ -37,7 +43,25 @@ angular.module('simple-sign').controller('SignCreatorController',
         // Generates new gradient on preview
         $scope.getNewRandomGradient();
 
-        // TODO: Add sign validation logic
+        // choose gradient generation option first
+        $scope.gradientBackground = true;
+
+        // should this be removed in favor of just ng-value=true/false?
+        // keeping it for now - may want to add image upload
+        $scope.backgroundType = [true, false];
+
+        $scope.getBackgroundColor = function() {
+
+            // set both items in colors array to chosen color
+            $scope.sign.colors[0] = '#' + $scope.sign.colors[0];
+            $scope.sign.colors[1] = $scope.sign.colors[0];
+
+            // adds the colors to the preview
+            $scope.previewGradient = {
+                'background': $scope.sign.colors[0]
+            };
+        }
+
 
         // Save sign logic
         $scope.saveSign = function(sign) {
@@ -83,5 +107,5 @@ angular.module('simple-sign').controller('SignCreatorController',
             class: 'btn-default ion-android-color-palette',
             disabled: true
         }]);
-        
+
     });
