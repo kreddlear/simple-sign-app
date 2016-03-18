@@ -11,7 +11,7 @@ angular.module('simple-sign').controller('SignCreatorController',
 
         //Firebase url + array declaration
         var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides"),
-        signs = $firebaseArray(signsRef);
+            signs = $firebaseArray(signsRef);
 
         // Set header title breadcrumb
         $enplugDashboard.setHeaderTitle('New sign');
@@ -48,7 +48,7 @@ angular.module('simple-sign').controller('SignCreatorController',
 
         // should this be removed in favor of just ng-value=true/false?
         // keeping it for now - may want to add image upload
-        $scope.backgroundType = [ true, false ];
+        $scope.backgroundType = [true, false];
 
         $scope.getBackgroundColor = function() {
 
@@ -62,7 +62,6 @@ angular.module('simple-sign').controller('SignCreatorController',
             };
         }
 
-        // TODO: Add sign validation logic
 
         // Save sign logic
         $scope.saveSign = function(sign) {
@@ -108,5 +107,5 @@ angular.module('simple-sign').controller('SignCreatorController',
             class: 'btn-default ion-android-color-palette',
             disabled: true
         }]);
-        
+
     });

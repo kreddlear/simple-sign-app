@@ -56,7 +56,7 @@ angular.module('simple-sign').controller('SignsController',
         // Sign substring
 
         $scope.getSubstring = function(str) {
-            return str.substring(1, 49);
+            return str.substring(0, 49);
         }
 
         // Header buttons handlers
