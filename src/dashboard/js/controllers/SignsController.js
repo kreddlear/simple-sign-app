@@ -77,6 +77,9 @@ angular.module('simple-sign').controller('SignsController',
 
         // Route to create in response to click of Create header button
         function goToCreateSign() {
+            if (!pages.length) {
+                $scope.createAsset();
+            }
             $location.path('/create');
         }
 

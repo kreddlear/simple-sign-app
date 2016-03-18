@@ -6,7 +6,8 @@ angular.module('simple-sign', [
     'enplug.sdk.utils',
     'ngRoute',
     'ngMessages',
-    'firebase'
+    'firebase',
+    'ngAnimate'
 ]);
 
 angular.module('simple-sign').config(function ($routeProvider, $locationProvider) {

@@ -70,18 +70,102 @@ a:hover {
 .sign-row {
     height: 3.5em;
 }
+
+
+/*clean up css*/
+
+#app-logo {
+    height: 72px;
+    text-align: center;
+    width: 61px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+
+/*#app-logo*/
+
+#main-heading-h1 {
+    color: rgb(51, 51, 51);
+    height: 68px;
+    letter-spacing: -1.28px;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    font: normal normal 200 normal 54px / 58px 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 22px 0px 0px
+}
+
+
+/*#main-heading-h1*/
+
+#subheading-h2 {
+    color: rgb(153, 153, 153);
+    height: 68px;
+    letter-spacing: -1.28px;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    border: 0px none rgb(153, 153, 153);
+    font: normal normal 200 normal 44px / 48px 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 0px 20px;
+    outline: rgb(153, 153, 153) none 0px;
+}
+
+
+/*#subheading-h2*/
+
+#description-paragraph {
+    color: rgb(51, 51, 51);
+    height: 128px;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    transform-origin: 395px 64px;
+    font: normal normal 200 normal 24px / 32.5001px 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: -25px 133.7px 2px;
+}
+
+
+/*#description-paragraph*/
+
+#video-container {
+    color: rgb(51, 51, 51);
+    /*height: 572px;*/
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    /*width: 978px;*/
+    transform-origin: 489px 286px;
+    font: normal normal normal normal 18px / 26.1px 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 10px
+}
+
+
+/*#video-container*/
 </style>
 <div class="container">
-    <div class="blank-slate" ng-hide="pages.length">
-        <i class="text-gray-light icon ion-android-color-palette"></i>
-        <h2>Welcome to SimpleSign!</h2>
-        <div class="card-content pv bb" style="display: flex; flex-flow: center;">
-            <div class="text-center" style="margin: auto;">
-                <a href="">
-                    <button ng-click="createAsset()" class="btn btn-lg btn-primary">Get Started</button>
-                </a>
-            </div>
+   <div ng-hide="pages.length">
+    <div id="app-logo">
+        <img src="https://d1e3b9cxfi9rtk.cloudfront.net/support-screens/ss-logo-rounded.png" width=60>
+    </div>
+    <h1 id="main-heading-h1">
+SimpleSign by Enplug
+    </h1>
+    <h2 id="subheading-h2">
+    Create beautiful signs in seconds.
+    </h2>
+    <p id="description-paragraph">
+        SimpleSign makes it easy to create gorgeous digital signage content in seconds. Simply type in your message, add some color and post it.
+        <br>Now, it's easier than ever to bring your messages to life.
+    </p>
+    <figure id="video-container">
+        <iframe src="//fast.wistia.net/embed/iframe/8phhww8e6b?seo=false" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="500" height="298"></iframe>
+        <script src="//fast.wistia.net/assets/external/E-v1.js" async></script>
+        <br>
+        <div style="text-align: center; margin: auto; margin-top: 20px">
+            <!-- <button ng-click="createAsset()" class="btn btn-lg btn-primary">Get Started</button> -->
+            <a class="btn btn-lg btn-primary" ng-class="button.class" ng-click="createAsset()">
+             <span>Get Started</span>
+            </a>
         </div>
+    </figure>
     </div>
     <div class="row" ng-if="pages.length">
         <div class="col-sm-3 section-summary">
@@ -100,10 +184,10 @@ a:hover {
                                 </div>
                                 <div class="col-xs-1"> <span class="btn btn-default btn-icon btn-sm ion-trash-a pull-right delete-sign-button" ng-click="deleteSign(sign)"></span>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="text-center" style="margin: auto;" ng-show="!signs.length" ng-cloak>
-                        <img src="/img/empty-state-plain.png">
+                            <img src="/img/empty-state-plain.png">
                         </div>
                     </section>
                 </div>
