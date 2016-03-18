@@ -53,6 +53,12 @@ angular.module('simple-sign').controller('SignsController',
 
         }
 
+        // Sign substring
+
+        $scope.getSubstring = function(str) {
+            return str.substring(1, 49);
+        }
+
         // Header buttons handlers
         $enplugDashboard.setHeaderButtons([{
             text: 'My Signs',

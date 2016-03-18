@@ -152,8 +152,8 @@ SimpleSign by Enplug
     Create beautiful signs in seconds.
     </h2>
     <p id="description-paragraph">
-        SimpleSign makes it easy to create gorgeous digital signage content in seconds. Simply type in your message, add some color and post it.
-        <br>Now, it's easier than ever to bring your messages to life.
+        SimpleSign makes it easy to create gorgeous digital signage content. Simply type in your message, add some color, and post it.
+        <br>Now, it's easier than ever to bring your messages to life on your displays!
     </p>
     <figure id="video-container">
         <iframe src="//fast.wistia.net/embed/iframe/8phhww8e6b?seo=false" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="500" height="298"></iframe>
@@ -177,10 +177,8 @@ SimpleSign by Enplug
                     <section class="grid">
                         <div class="grid__item" ng-repeat="sign in signs" ng-style='{"border-bottom": "3px solid" + sign.colors[1] + ""}'>
                             <div class="row sign-row">
-                                <div class="col-xs-11">
-                                    <!-- <h2 class="title title--preview">{{ sign.headline }}</h2> -->
-                                    <span ng-hide="sign.headline.length > 49" style="font-size: 24px;">{{ sign.headline | limitTo: 49 }}</span>
-                                    <span ng-show="sign.headline.length > 49" style="font-size: 24px; -webkit-mask-image: -webkit-gradient(linear, 85% 0, 100% 0, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));">{{ sign.headline | limitTo: 49 }}</span>
+                                <div class="col-xs-11" style="-webkit-mask-image: -webkit-gradient(linear, 75% 0, 100% 0, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));">
+                                    <span style="font-size: 24px;">{{ getSubstring(sign.headline) }}</span>
                                 </div>
                                 <div class="col-xs-1"> <span class="btn btn-default btn-icon btn-sm ion-trash-a pull-right delete-sign-button" ng-click="deleteSign(sign)"></span>
                                 </div>
