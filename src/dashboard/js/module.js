@@ -1,7 +1,7 @@
 angular.module('simple-sign', [
-//   TODO
-//   [] Test to see which app templates dep we need 
-    'dashboard-web-page-app-templates', 
+    //   TODO
+    //   [] Test to see which app templates dep we need 
+    'dashboard-web-page-app-templates',
     'enplug.sdk',
     'enplug.sdk.utils',
     'ngRoute',
@@ -9,7 +9,7 @@ angular.module('simple-sign', [
     'firebase'
 ]);
 
-angular.module('simple-sign').config(function ($routeProvider, $locationProvider) {
+angular.module('simple-sign').config(function($routeProvider, $locationProvider) {
     'use strict';
 
     $locationProvider.html5Mode(false);
@@ -26,7 +26,7 @@ angular.module('simple-sign').config(function ($routeProvider, $locationProvider
                     return WebPageService.getAccount().then(function(account) {
                         return account;
                     });
-                },                
+                },
                 displayGroup: function(WebPageService) {
                     return WebPageService.getDisplayGroup().then(function(displayGroup) {
                         return displayGroup;
@@ -56,7 +56,7 @@ angular.module('simple-sign').directive('autoFocus', function($timeout) {
     return {
         restrict: 'AC',
         link: function(_scope, _element) {
-            $timeout(function(){
+            $timeout(function() {
                 _element[0].focus();
             }, 0);
         }

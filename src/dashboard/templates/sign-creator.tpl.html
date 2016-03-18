@@ -3,14 +3,15 @@
         <div class="col-sm-9">
             <div class="card sign-creator">
                 <div class="card-content">
-                    <h2 class="text-center">New Sign</h2>
                     <div class="row">
                         <div class="col-md-4">
+                            <h2 class="text-center">Sign Text</h2>
                             <div class="form-group">
-                                <textarea ng-model="sign.headline" field="headerAsset.Value.Title" class="form-control" rows="15" id="comment" maxlength=165 focus-on="mainTextArea"></textarea>
+                                <textarea ng-model="sign.headline" field="headerAsset.Value.Title" class="form-control" rows="15" id="comment" maxlength=165 focus-on="mainTextArea" style="height: 200px;" wrap="soft"></textarea>
                             </div>
                         </div>
                         <div class="col-md-8">
+                            <h2 class="text-center">Preview</h2>
                             <div class="preview-container">
                                 <div class="preview">
                                     <div class="preview-wrapper" ng-class="landscapePreview ? 'landscape' : 'portrait'">
@@ -49,14 +50,17 @@
                 </div>
                 <div class="card-content pv bb" style="display:flex; flex-flow: center;">
                     <div class="text-center" ng-show="gradientBackground" style="margin: auto;">
-                        <button type="button" ng-click="getNewRandomGradient()" class="btn btn-primary btn-circle btn-lg ion-ios-color-wand-outline" style="display: block; margin: auto;"></button>
-                        <div class="text-center"><small style="color: #798c9c;">Click for new colors</small></div>
-
+                        <a class="btn btn-primary ion-ios-color-wand-outline" ng-click="getNewRandomGradient()">
+                            <span>Random Gradient</span>
+                        </a>
+                        <br/>
+                        <p class="text-g text-center" style="font-size: 11px; text-align: center; margin-top: 4px;">click to get new colors</p>
                     </div>
                     <div class="text-center" ng-show="!gradientBackground" style="margin:auto;">
                         <color-picker class="mt-lg" ng-model="sign.colors[0]" ng-change="getBackgroundColor()">
                             Background Color
                         </color-picker>
+                        <p class="text-g text-center" style="font-size: 11px; text-align: center; margin-top: 4px;">click box to choose color</p>
                     </div>
                 </div>
             </div>

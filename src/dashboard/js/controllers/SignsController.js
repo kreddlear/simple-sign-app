@@ -2,12 +2,27 @@ angular.module('simple-sign').controller('SignsController',
     function($scope, WebPageService, pages, account, displayGroup, $log, $enplugDashboard, $location, $firebaseArray) {
         "use strict";
 
-        
+        // Firebase
+        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides");
 
-        $enplugDashboard.pageLoading(false);
+        var signs = $firebaseArray(signsRef);
+
+        console.log(pages.length);
+
+        signs.$loaded()
+            .then(function(x) {
+                $enplugDashboard.pageLoading(false);
+                $scope.signs = signs;
+            })
+            .catch(function(error) {
+                console.log("Error:", error);
+            });
+
+        $scope.pages = pages;
+
 
         // If no assets/pages exist, create an asset 
-        if (!pages.length) {
+        $scope.createAsset = function() {
 
             // Initialize page object. This object will eventually be the asset
             var page = {
@@ -29,11 +44,19 @@ angular.module('simple-sign').controller('SignsController',
             promise = WebPageService.createWebPage(page);
             promise.then(function() {
                 $enplugDashboard.successIndicator('Created new Simple Sign collection.').then(function() {
-                    
-                    // Routes to signs view
-                    $location.path('/');
+
+                    // Routes to create sign view
+                    $location.path('/create');
+
                 });
             }, $enplugDashboard.errorIndicator);
+
+        }
+
+        // Sign substring
+
+        $scope.getSubstring = function(str) {
+            return str.substring(0, 49);
         }
 
         // Header buttons handlers
@@ -45,7 +68,7 @@ angular.module('simple-sign').controller('SignsController',
         }, {
             text: 'Create',
             action: goToCreateSign,
-            class: 'btn-default ion-android-color-palette'
+            class: 'btn-primary ion-android-color-palette'
         }]);
 
         // Give the Scope the display group id to create the URL with. See signs template for implementation
@@ -60,13 +83,12 @@ angular.module('simple-sign').controller('SignsController',
 
         // Route to create in response to click of Create header button
         function goToCreateSign() {
+            if (!pages.length) {
+                $scope.createAsset();
+            }
             $location.path('/create');
         }
- 
-        // Firebase
-        var signsRef = new Firebase("https://simplesign.firebaseio.com/accounts/" + account.id + "/slides");
 
-        $scope.signs = $firebaseArray(signsRef);       
 
         $scope.deleteSign = function(sign) {
             // added $scope in here because otherwise it didn't recognize signs
